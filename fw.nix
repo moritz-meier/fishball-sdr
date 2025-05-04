@@ -18,6 +18,6 @@ zynq-utils.zynq7.board {
 
   flash-qspi = {
     flashType = "qspi-x4-single";
-    flashDensity = 128;
+    flashDensity = 16;
   };
 }
