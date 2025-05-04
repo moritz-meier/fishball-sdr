@@ -4,6 +4,10 @@ zynq-utils.zynq7.board {
   name = "fishball-sdr";
   src = ./vivado-srcs;
 
+  sdt = {
+    extraDtsi = ./dts/board.dtsi;
+  };
+
   uboot.extraConfig = ''
     CONFIG_LOG=y
     CONFIG_CMD_LOG=y
@@ -14,6 +18,6 @@ zynq-utils.zynq7.board {
 
   flash-qspi = {
     flashType = "qspi-x4-single";
-    flashDensity = 256;
+    flashDensity = 128;
   };
 }
