@@ -34,8 +34,8 @@
                 };
 
                 overlays = [
-                  self.overlays.zynq-srcs
-                  self.overlays.zynq-utils
+                  xlnx-utils.overlays.zynq-srcs
+                  xlnx-utils.overlays.zynq-utils
                 ];
               };
             };
@@ -44,7 +44,6 @@
           xlnx-utils.overlays.default
           xlnx-utils.overlays.zynq-srcs
           xlnx-utils.overlays.zynq-utils
-          xlnx-utils.overlays.zynq-boards
 
           (final: prev: {
             zynq-srcs = prev.zynq-srcs // {
@@ -64,8 +63,15 @@
       treefmtEval = treefmt.lib.evalModule pkgs ./treefmt.nix;
     in
     {
-      packages.${system} = {
-      };
+      packages.${system} =
+        let
+          board = pkgs.callPackage ./fw.nix { };
+        in
+        {
+          fw = board.boot-image;
+          boot = board.boot-jtag;
+          flash = board.flash-qspi;
+        };
 
       devShells.${system}.default = pkgs.devshell.mkShell {
         name = "xilinx-dev-shell";
