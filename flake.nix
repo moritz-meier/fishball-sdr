@@ -2,6 +2,12 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-24.11";
     xlnx-utils.url = "github:moritz-meier/xilinx-nix-utils?ref=2024.2";
+
+    nixos-gen = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
     treefmt.url = "github:numtide/treefmt-nix";
@@ -13,6 +19,7 @@
       self,
       nixpkgs,
       xlnx-utils,
+      nixos-gen,
       devshell,
       treefmt,
     }:
@@ -69,8 +76,23 @@
         in
         {
           fw = board.boot-image;
+          dt = board.linux-dt;
+          uboot = board.uboot;
           boot = board.boot-jtag;
           flash = board.flash-qspi;
+
+          linux = nixos-gen.nixosGenerate {
+            inherit system;
+
+            modules = [
+              {
+                nixpkgs.crossSystem.system = "armv7l-linux";
+              }
+              "${nixpkgs}/nixos/modules/profiles/minimal.nix"
+            ];
+
+            format = "raw";
+          };
         };
 
       devShells.${system}.default = pkgs.devshell.mkShell {

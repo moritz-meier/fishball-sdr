@@ -2,9 +2,12 @@
 
 zynq-utils.zynq7.board {
   name = "fishball-sdr";
-  src = ./vivado-srcs;
 
-  sdt = {
+  hwplat = {
+    src = ./vivado-srcs;
+  };
+
+  linux-dt = {
     extraDtsi = ./dts/board.dtsi;
   };
 

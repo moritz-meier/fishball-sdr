@@ -41,6 +41,42 @@
         "type": "github"
       }
     },
+    "nixlib": {
+      "locked": {
+        "lastModified": 1736643958,
+        "narHash": "sha256-tmpqTSWVRJVhpvfSN9KXBvKEXplrwKnSZNAoNPf/S/s=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "1418bc28a52126761c02dd3d89b2d8ca0f521181",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
+    "nixos-gen": {
+      "inputs": {
+        "nixlib": "nixlib",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1742568034,
+        "narHash": "sha256-QaMEhcnscfF2MqB7flZr+sLJMMYZPnvqO4NYf9B4G38=",
+        "owner": "nix-community",
+        "repo": "nixos-generators",
+        "rev": "42ee229088490e3777ed7d1162cb9e9d8c3dbb11",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixos-generators",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1744440957,
@@ -76,6 +112,7 @@
     "root": {
       "inputs": {
         "devshell": "devshell",
+        "nixos-gen": "nixos-gen",
         "nixpkgs": "nixpkgs",
         "treefmt": "treefmt",
         "xlnx-utils": "xlnx-utils"
@@ -129,11 +166,11 @@
         "treefmt": "treefmt_2"
       },
       "locked": {
-        "lastModified": 1746387967,
-        "narHash": "sha256-vXUCW+aDOC824+u8IAPSksw70RTIzd8qblY/vZHCWgY=",
+        "lastModified": 1746655758,
+        "narHash": "sha256-RivqHYl0DbzzPRTyVoF00THgq9UASeyEeQaAwG2+U+s=",
         "owner": "moritz-meier",
         "repo": "xilinx-nix-utils",
-        "rev": "f63234a42d97f71530d8e0ff648b214065781bf7",
+        "rev": "14e4c33c04526f5480b30cf588b0025704f34d6b",
         "type": "github"
       },
       "original": {
