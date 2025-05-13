@@ -67,7 +67,13 @@
         let
           board = pkgs.callPackage ./fw.nix { };
         in
-        {
+        (nixpkgs.lib.filesystem.packagesFromDirectoryRecursive {
+          callPackage = nixpkgs.lib.callPackageWith (
+            pkgs.pkgsCross.armv7l-hf-multiplatform // { thisFlake = self; }
+          );
+          directory = ./pkgs-cross;
+        })
+        // {
           fw = board.boot-image;
           dt = board.linux-dt;
           uboot = board.uboot;
@@ -75,24 +81,16 @@
           flash = board.flash-qspi;
         };
 
-      # nixosConfigurations.foo = nixpkgs.lib.nixosSystem {
-      #   specialArgs = {
-      #     inherit inputs;
-      #     flakeRoot = ./.;
-      #   };
-      #   modules = [
-      #     (
-      #       {
-      #         modulesPath,
-      #         ...
-      #       }:
-      #       {
-      #         nixpkgs.buildPlatform = "x86_64-linux";
-      #         nixpkgs.hostPlatform = "aarch64-linux";
-      #       }
-      #     )
-      #   ];
-      # };
+      nixosConfigurations.minimal-rootfs = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          thisFlake = self;
+          flakeRoot = ./.;
+        };
+        modules = [
+          (import ./configurations/minimal-rootfs.nix)
+        ];
+      };
 
       devShells.${system}.default = pkgs.devshell.mkShell {
         name = "xilinx-dev-shell";
