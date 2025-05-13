@@ -2,12 +2,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-24.11";
     xlnx-utils.url = "github:moritz-meier/xilinx-nix-utils?ref=2024.2";
-
-    nixos-gen = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
     treefmt.url = "github:numtide/treefmt-nix";
@@ -19,10 +13,9 @@
       self,
       nixpkgs,
       xlnx-utils,
-      nixos-gen,
       devshell,
       treefmt,
-    }:
+    }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -80,20 +73,26 @@
           uboot = board.uboot;
           boot = board.boot-jtag;
           flash = board.flash-qspi;
-
-          linux = nixos-gen.nixosGenerate {
-            inherit system;
-
-            modules = [
-              {
-                nixpkgs.crossSystem.system = "armv7l-linux";
-              }
-              "${nixpkgs}/nixos/modules/profiles/minimal.nix"
-            ];
-
-            format = "raw";
-          };
         };
+
+      # nixosConfigurations.foo = nixpkgs.lib.nixosSystem {
+      #   specialArgs = {
+      #     inherit inputs;
+      #     flakeRoot = ./.;
+      #   };
+      #   modules = [
+      #     (
+      #       {
+      #         modulesPath,
+      #         ...
+      #       }:
+      #       {
+      #         nixpkgs.buildPlatform = "x86_64-linux";
+      #         nixpkgs.hostPlatform = "aarch64-linux";
+      #       }
+      #     )
+      #   ];
+      # };
 
       devShells.${system}.default = pkgs.devshell.mkShell {
         name = "xilinx-dev-shell";
