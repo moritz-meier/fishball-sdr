@@ -18,18 +18,18 @@
                                 algo = "sha1";
                         };
                 };
-                // fdt {
-                //         description = "DTB";
-                //         data = /incbin/("super-duper.dtb");
-                //         type = "flat_dt";
-                //         arch = "arm";
-                //         compression = "none";
-                //         load = <0x00100000>;
-                //         entry = <0x00100000>;
-                //         hash {
-                //                 algo = "sha1";
-                //         };
-                // };
+                fdt {
+                        description = "DTB";
+                        data = /incbin/("@dtb@");
+                        type = "flat_dt";
+                        arch = "arm";
+                        compression = "none";
+                        load = <0x00100000>;
+                        entry = <0x00100000>;
+                        hash {
+                                algo = "sha1";
+                        };
+                };
                 initrd {
                         description = "Initrd";
                         data = /incbin/("@initrd@");
@@ -48,7 +48,7 @@
                 standard {
                         description = "Standard Boot";
                         kernel = "kernel";
-                        // fdt = "fdt";
+                        fdt = "fdt";
                         ramdisk = "initrd";
                         hash {
                                 algo = "sha1";
