@@ -14,10 +14,7 @@
   ];
 
   config = {
-    # TODO this is a hack. Consider removing it. Or whatever.
-    boot.kernelPackages = pkgs.linuxPackages_6_6 // {
-      kernel = pkgs.callPackage ../pkgs-cross/kernel/package.nix { };
-    };
+    boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.callPackage ../pkgs-cross/kernel/package.nix { });
 
     nixpkgs.overlays = [
       (final: prev: {

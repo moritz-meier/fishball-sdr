@@ -1,25 +1,33 @@
 {
-  linuxManualConfig,
+  lib,
+  fetchFromGitHub,
   linuxPackages_6_6,
-  linuxPackages ? linuxPackages_6_6,
-  kernel ? linuxPackages.kernel,
 }:
 
-(linuxManualConfig {
-  inherit (linuxPackages.kernel) version src;
-  configfile = ./.config;
-
-})
-// {
-  passthru = {
-    # To configure:
-    #
-    # nix develop ../..\#kernel.passthru.configEnv
-    #
-    # $ runPhase unpackPhase
-    # $ runPhase patchPhase
-    # $ make $makeFlags menuconfig
-    # $ cp .config ../
-    inherit (kernel) configEnv;
+linuxPackages_6_6.kernel.override {
+  autoModules = false;
+  kernelPreferBuiltin = true;
+  enableCommonConfig = false; # dont inject common nixpkgs config stuff
+  defconfig = "xilinx_zynq_defconfig";
+  argsOverride = {
+    src = fetchFromGitHub {
+      owner = "Xilinx";
+      repo = "linux-xlnx";
+      rev = "xlnx_rebase_v6.6_LTS_2024.2";
+      hash = "sha256-jI6/r28vhalSqOOq5/cMTcZdzyXOAwBeUV3eWKrsDUs=";
+    };
+    version = "6.6.40";
+    modDirVersion = "6.6.40-xilinx";
+    structuredExtraConfig = with lib.kernel; {
+      DRM = no;
+      # DRM_XLNX = no;
+      SOUND = no;
+      # SND = no;
+      # VIDEO_XILINX = no;
+      MEDIA_SUPPORT = no;
+      SCSI = no; # ???
+      # V4L_PLATFORM_DRIVERS = no;
+      # VIDEO_ADV7604 = no;
+    };
   };
 }
