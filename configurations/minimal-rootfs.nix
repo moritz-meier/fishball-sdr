@@ -14,7 +14,35 @@
   ];
 
   config = {
-    boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.callPackage ../pkgs-cross/kernel/package.nix { });
+    boot.kernelPackages = pkgs.linuxPackagesFor (
+      pkgs.linuxPackages_6_6.kernel.override {
+        autoModules = false;
+        kernelPreferBuiltin = true;
+        enableCommonConfig = false; # dont inject common nixpkgs config stuff
+        defconfig = "xilinx_zynq_defconfig";
+        argsOverride = {
+          src = pkgs.fetchFromGitHub {
+            owner = "Xilinx";
+            repo = "linux-xlnx";
+            rev = "xlnx_rebase_v6.6_LTS_2024.2";
+            hash = "sha256-jI6/r28vhalSqOOq5/cMTcZdzyXOAwBeUV3eWKrsDUs=";
+          };
+          version = "6.6.40";
+          modDirVersion = "6.6.40-xilinx";
+          structuredExtraConfig = with lib.kernel; {
+            DRM = no;
+            # DRM_XLNX = no;
+            SOUND = no;
+            # SND = no;
+            # VIDEO_XILINX = no;
+            MEDIA_SUPPORT = no;
+            SCSI = no; # ???
+            # V4L_PLATFORM_DRIVERS = no;
+            # VIDEO_ADV7604 = no;
+          };
+        };
+      }
+    );
 
     nixpkgs.overlays = [
       (final: prev: {
@@ -243,6 +271,12 @@
       won't be necessary.
     */
     boot.postBootCommands = lib.mkForce "";
+
+    /*
+      This is an NixOS internal information about the system, which closing in the about kernel and
+      bootloader, but we don't need it in the initrd.
+    */
+    boot.bootspec.enable = false;
 
     boot.initrd.systemd.services.initrd-find-nixos-closure = {
       /*
