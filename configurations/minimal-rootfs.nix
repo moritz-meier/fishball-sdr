@@ -19,27 +19,74 @@
         autoModules = false;
         kernelPreferBuiltin = true;
         enableCommonConfig = false; # dont inject common nixpkgs config stuff
-        defconfig = "xilinx_zynq_defconfig";
+        # defconfig = "xilinx_zynq_defconfig";
         argsOverride = {
-          src = pkgs.fetchFromGitHub {
-            owner = "Xilinx";
-            repo = "linux-xlnx";
-            rev = "xlnx_rebase_v6.6_LTS_2024.2";
-            hash = "sha256-jI6/r28vhalSqOOq5/cMTcZdzyXOAwBeUV3eWKrsDUs=";
-          };
-          version = "6.6.40";
-          modDirVersion = "6.6.40-xilinx";
+          # src = pkgs.fetchFromGitHub {
+          #   owner = "Xilinx";
+          #   repo = "linux-xlnx";
+          #   rev = "xlnx_rebase_v6.6_LTS_2024.2";
+          #   hash = "sha256-jI6/r28vhalSqOOq5/cMTcZdzyXOAwBeUV3eWKrsDUs=";
+          # };
+          # version = "6.6.40";
+          # modDirVersion = "6.6.40-xilinx";
           structuredExtraConfig = with lib.kernel; {
+            #
+            ### Desired features
+            #
+            CRYPTO_USER_API_HASH = yes;
+            # ZSTD = yes;
+
+            EROFS_FS = yes;
+            # EROFS_FS_POSIX_ACL = yes;
+            # EROFS_FS_XATTR = yes;
+
+            OVERLAY_FS = yes;
+
+            SQUASHFS = yes;
+            # SQUASHFS_FS_POSIX_ACL = yes;
+            # SQUASHFS_FS_XATTR = yes;
+            SQUASHFS_ZSTD = yes;
+            SQUASHFS_CHOICE_DECOMP_BY_MOUNT = yes; # make `mount -o threads=multi` work
+
+            # SERIAL_8250 = yes;
+            # SERIAL_8250_CONSOLE = yes;
+
+            SERIAL_AMBA_PL011 = yes;
+            SERIAL_AMBA_PL011_CONSOLE = yes;
+
+            SERIAL_AMBA_PL010 = yes; # for QEMU?
+            SERIAL_AMBA_PL010_CONSOLE = yes;
+
+            SERIAL_XILINX_PS_UART = yes; # for real HW
+            SERIAL_XILINX_PS_UART_CONSOLE = yes;
+
+            SERIAL_UARTLITE = yes; # or the above?
+            SERIAL_UARTLITE_CONSOLE = yes;
+
+            #
+            ### Pruning of unecessary stuff
+            #
+
+            # ARM_BIG_LITTLE_CPUIDLE = no;
+            # KS8851_MLL = no;
+            # SERIAL_8250_BCM2835AUX = no;
+            # SERIAL_8250_EXTENDED = no;
+            # SERIAL_8250_SHARE_IRQ = no;
+            # SQUASHFS_FS_POSIX_ACL
+            # SQUASHFS_FS_XATTR
+
             DRM = no;
-            # DRM_XLNX = no;
             SOUND = no;
-            # SND = no;
-            # VIDEO_XILINX = no;
             MEDIA_SUPPORT = no;
-            SCSI = no; # ???
-            # V4L_PLATFORM_DRIVERS = no;
-            # VIDEO_ADV7604 = no;
+
+            #
+            ### Boot debugging desperation
+            #
+
+            # HIGHMEM = no; # something activates this :(
+            HIGHPTE = no;
           };
+          ignoreConfigErrors = false;
         };
       }
     );
