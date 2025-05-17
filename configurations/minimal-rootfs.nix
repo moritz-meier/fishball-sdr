@@ -108,6 +108,21 @@
           pluginsSupport = true;
           hostCpuTargets = [ "${pkgs.stdenv.hostPlatform.qemuArch}-softmmu" ];
         };
+
+        # TODO remove once userborn 0.4.0 lands in the stable nixpkgs
+        # Upstream Issue https://github.com/nikstur/userborn/issues/19
+        userborn = prev.userborn.overrideAttrs (old: rec {
+          version = "0.4.0";
+          src = prev.fetchFromGitHub {
+            inherit (old.src) owner repo;
+            rev = version;
+            hash = "sha256-Zh2u7we/MAIM7varuJA4AmEWeSMuA/C+0NSIUJN7zTs=";
+          };
+          cargoDeps = old.cargoDeps.overrideAttrs {
+            inherit src;
+            outputHash = "sha256-pEEdsldl3yFPRB3pj0EE2HC3E0N2tAboJbLjnfg6tYA=";
+          };
+        });
       })
     ];
     systemd.coredump.enable = false;
