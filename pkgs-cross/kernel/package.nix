@@ -2,9 +2,12 @@
   lib,
   fetchFromGitHub,
   linuxPackages_6_6,
-}:
+  ...
+}@args:
+# TODO reassess if this is clever with args passing through
 
-linuxPackages_6_6.kernel.override {
+linuxPackages_6_6.kernel.override args
+// {
   autoModules = false;
   kernelPreferBuiltin = true;
   enableCommonConfig = false; # dont inject common nixpkgs config stuff
