@@ -1,5 +1,5 @@
 /dts-v1/;
-
+// Memory addresses implement the recommendation in https://docs.kernel.org/arch/arm/booting.html
 / {
         description = "Fishball FIT Image";
         #address-cells = <1>;
@@ -12,10 +12,10 @@
                         arch = "arm";
                         os = "linux";
                         compression = "none";
-                        load = <0x2080000>;
-                        entry = <0x2080000>;
+                        load = <0x2000000>; // just after 32 MiB
+                        entry = <0x2000000>;
                         hash {
-                                algo = "sha1";
+                                algo = "crc32";
                         };
                 };
                 fdt {
@@ -24,10 +24,9 @@
                         type = "flat_dt";
                         arch = "arm";
                         compression = "none";
-                        load = <0x00100000>;
-                        entry = <0x00100000>;
+                        load = <0x8000000>; // just after 128 MiB
                         hash {
-                                algo = "sha1";
+                                algo = "crc32";
                         };
                 };
                 initrd {
@@ -37,8 +36,9 @@
                         arch = "arm";
                         os = "linux";
                         compression = "none";
+                        load = <0x8100000>; // just behind the dtb
                         hash {
-                                algo = "sha1";
+                                algo = "crc32";
                         };
                 };
         };
@@ -51,7 +51,7 @@
                         fdt = "fdt";
                         ramdisk = "initrd";
                         hash {
-                                algo = "sha1";
+                                algo = "crc32";
                         };
                 };
         };
