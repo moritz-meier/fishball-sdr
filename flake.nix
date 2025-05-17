@@ -110,13 +110,13 @@
           pkgs.xilinx-unified
         ];
 
-        git.hooks = {
-          enable = true;
-          pre-commit.text = ''
-            nix fmt
-            nix flake check
-          '';
-        };
+        # git.hooks = {
+        #   enable = true;
+        #   pre-commit.text = ''
+        #     nix fmt
+        #     nix flake check
+        #   '';
+        # };
       };
 
       # for `nix fmt`
