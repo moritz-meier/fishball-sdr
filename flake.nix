@@ -1,7 +1,9 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-24.11";
-    xlnx-utils.url = "github:moritz-meier/xilinx-nix-utils?ref=2024.2";
+    nixpkgs.url = "github:NixOS/nixpkgs?ref=master";
+    nixpkgs-2411.url = "github:NixOS/nixpkgs?ref=24.11";
+    xlnx-utils.url = "github:dlr-ft/xilinx-nix-utils?ref=main";
+    xlnx-utils.inputs.nixpkgs.follows = "nixpkgs-2411";
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
     treefmt.url = "github:numtide/treefmt-nix";
@@ -15,6 +17,7 @@
       xlnx-utils,
       devshell,
       treefmt,
+      ...
     }@inputs:
     let
       system = "x86_64-linux";
@@ -75,24 +78,28 @@
           flash = board.flash-qspi;
         };
 
-      # nixosConfigurations.foo = nixpkgs.lib.nixosSystem {
-      #   specialArgs = {
-      #     inherit inputs;
-      #     flakeRoot = ./.;
-      #   };
-      #   modules = [
-      #     (
-      #       {
-      #         modulesPath,
-      #         ...
-      #       }:
-      #       {
-      #         nixpkgs.buildPlatform = "x86_64-linux";
-      #         nixpkgs.hostPlatform = "aarch64-linux";
-      #       }
-      #     )
-      #   ];
-      # };
+      nixosConfigurations.foo = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          flakeRoot = ./.;
+        };
+        modules = [
+          (
+            {
+              modulesPath,
+              ...
+            }:
+            {
+              imports = [
+                (modulesPath + "/installer/netboot/netboot.nix")
+              ];
+
+              nixpkgs.buildPlatform = "x86_64-linux";
+              nixpkgs.hostPlatform = "armv7l-linux";
+            }
+          )
+        ];
+      };
 
       devShells.${system}.default = pkgs.devshell.mkShell {
         name = "xilinx-dev-shell";
