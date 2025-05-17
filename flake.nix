@@ -68,6 +68,10 @@
           board = pkgs.callPackage ./fw.nix { };
         in
         (nixpkgs.lib.filesystem.packagesFromDirectoryRecursive {
+          callPackage = nixpkgs.lib.callPackageWith (pkgs // { thisFlake = self; });
+          directory = ./pkgs;
+        })
+        // (nixpkgs.lib.filesystem.packagesFromDirectoryRecursive {
           callPackage = nixpkgs.lib.callPackageWith (
             pkgs.pkgsCross.armv7l-hf-multiplatform // { thisFlake = self; }
           );
