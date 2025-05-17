@@ -78,6 +78,12 @@
           directory = ./pkgs-cross;
         })
         // {
+          inherit (self.nixosConfigurations.minimal-rootfs.config.system.build)
+            kernel
+            netbootramdisk
+            ;
+        }
+        // {
           fw = board.boot-image;
           dt = board.linux-dt;
           uboot = board.uboot;
