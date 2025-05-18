@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs?ref=master";
     xlnx-utils.url = "github:dlr-ft/xilinx-nix-utils?ref=main";
     xlnx-utils.inputs.nixpkgs.follows = "nixpkgs";
     devshell.url = "github:numtide/devshell";
