@@ -1,9 +1,8 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs?ref=master";
-    nixpkgs-2411.url = "github:NixOS/nixpkgs?ref=24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-24.11";
     xlnx-utils.url = "github:dlr-ft/xilinx-nix-utils?ref=main";
-    xlnx-utils.inputs.nixpkgs.follows = "nixpkgs-2411";
+    xlnx-utils.inputs.nixpkgs.follows = "nixpkgs";
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
     treefmt.url = "github:numtide/treefmt-nix";
