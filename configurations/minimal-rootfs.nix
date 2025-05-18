@@ -109,6 +109,11 @@
         #   systemd = prev.systemd;
         # };
 
+        # Workaround
+        # Checks fail when SELinux is enforced or permissive (Fedora).
+        # Disabeling SELinux completely works, but reenabling it is tedious (machine wont boot anymore)
+        composefs = prev.composefs.overrideAttrs (final: prev: { doCheck = false; });
+
         systemd = prev.systemd.override {
           withAnalyze = false;
           withApparmor = false;
