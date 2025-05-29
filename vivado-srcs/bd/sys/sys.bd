@@ -7,7 +7,8 @@
       "pfm_name": "vendor:lib:sys:1.0",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
       "synth_flow_mode": "Hierarchical",
-      "tool_version": "2024.2"
+      "tool_version": "2024.2",
+      "validated": "true"
     },
     "design_tree": {
       "processing_system7_0": "",
@@ -188,7 +189,7 @@
         "vlnv": "xilinx.com:ip:processing_system7:5.5",
         "ip_revision": "6",
         "xci_name": "sys_processing_system7_0_0",
-        "xci_path": "ip/sys_processing_system7_0_0/sys_processing_system7_0_0.xci",
+        "xci_path": "ip/sys_processing_system7_0_0_2/sys_processing_system7_0_0.xci",
         "inst_hier_path": "processing_system7_0",
         "parameters": {
           "PCW_ACT_APU_PERIPHERAL_FREQMHZ": {
@@ -634,11 +635,74 @@
           "PCW_UIPARAM_ACT_DDR_FREQ_MHZ": {
             "value": "533.333374"
           },
+          "PCW_UIPARAM_DDR_BANK_ADDR_COUNT": {
+            "value": "3"
+          },
+          "PCW_UIPARAM_DDR_BOARD_DELAY0": {
+            "value": "0.2"
+          },
+          "PCW_UIPARAM_DDR_BOARD_DELAY1": {
+            "value": "0.2"
+          },
+          "PCW_UIPARAM_DDR_BOARD_DELAY2": {
+            "value": "0.25"
+          },
+          "PCW_UIPARAM_DDR_BOARD_DELAY3": {
+            "value": "0.25"
+          },
           "PCW_UIPARAM_DDR_BUS_WIDTH": {
             "value": "32 Bit"
           },
+          "PCW_UIPARAM_DDR_CL": {
+            "value": "11"
+          },
+          "PCW_UIPARAM_DDR_COL_ADDR_COUNT": {
+            "value": "10"
+          },
+          "PCW_UIPARAM_DDR_CWL": {
+            "value": "8"
+          },
+          "PCW_UIPARAM_DDR_DEVICE_CAPACITY": {
+            "value": "4096 MBits"
+          },
+          "PCW_UIPARAM_DDR_DQS_TO_CLK_DELAY_0": {
+            "value": "0.2"
+          },
+          "PCW_UIPARAM_DDR_DQS_TO_CLK_DELAY_1": {
+            "value": "0.2"
+          },
+          "PCW_UIPARAM_DDR_DQS_TO_CLK_DELAY_2": {
+            "value": "0.25"
+          },
+          "PCW_UIPARAM_DDR_DQS_TO_CLK_DELAY_3": {
+            "value": "0.25"
+          },
+          "PCW_UIPARAM_DDR_DRAM_WIDTH": {
+            "value": "16 Bits"
+          },
           "PCW_UIPARAM_DDR_PARTNO": {
-            "value": "MT41K256M16 RE-125"
+            "value": "Custom"
+          },
+          "PCW_UIPARAM_DDR_ROW_ADDR_COUNT": {
+            "value": "15"
+          },
+          "PCW_UIPARAM_DDR_SPEED_BIN": {
+            "value": "DDR3_1600K"
+          },
+          "PCW_UIPARAM_DDR_T_FAW": {
+            "value": "40"
+          },
+          "PCW_UIPARAM_DDR_T_RAS_MIN": {
+            "value": "35"
+          },
+          "PCW_UIPARAM_DDR_T_RC": {
+            "value": "48.75"
+          },
+          "PCW_UIPARAM_DDR_T_RCD": {
+            "value": "11"
+          },
+          "PCW_UIPARAM_DDR_T_RP": {
+            "value": "11"
           }
         },
         "interface_ports": {
@@ -780,7 +844,7 @@
         "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
         "ip_revision": "16",
         "xci_name": "sys_proc_sys_reset_0_0",
-        "xci_path": "ip/sys_proc_sys_reset_0_0/sys_proc_sys_reset_0_0.xci",
+        "xci_path": "ip/sys_proc_sys_reset_0_0_2/sys_proc_sys_reset_0_0.xci",
         "inst_hier_path": "proc_sys_reset_0"
       }
     },
