@@ -1,7 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs?ref=master";
-    xlnx-utils.url = "github:dlr-ft/xilinx-nix-utils?ref=main";
+    xlnx-utils.url = "github:moritz-meier/xilinx-nix-utils?ref=feat/dram-test";
     xlnx-utils.inputs.nixpkgs.follows = "nixpkgs";
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
@@ -53,7 +53,7 @@
                 owner = "Xilinx";
                 repo = "u-boot-xlnx";
                 rev = "xlnx_rebase_v2025.01";
-                hash = "sha256-uN6oXoa6huclsz1c5Z2IyIvJoRfMr1QsfKF6Y2Z4zf4=";
+                hash = "sha256-RTcd7MR37E4yVGWP3RMruyKBI4tz8ex7mY1f5F2xd00=";
               };
             };
           })
@@ -72,6 +72,7 @@
         {
           fw = board.boot-image;
           dt = board.linux-dt;
+          dram-test = board.dram-test;
           uboot = board.uboot;
           boot = board.boot-jtag;
           flash = board.flash-qspi;
