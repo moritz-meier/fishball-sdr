@@ -1,3 +1,21 @@
+/ {
+	memory@0 {
+		device_type = "memory";
+		reg = <0x00100000 0x3FF00000>;
+	};
+
+	reserved-memory {
+    	#address-cells = <1>;
+      	#size-cells = <1>;
+      	ranges;
+  
+      	reserved: buffer@0x0 {
+        	no-map;
+         	reg = <0x0 0x00100000>;
+      	};
+   };
+};
+
 &qspi {
 	flash@0 {
 		compatible = "jedec,spi-nor";

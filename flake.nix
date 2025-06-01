@@ -76,6 +76,8 @@
           uboot = board.uboot;
           boot = board.boot-jtag;
           flash = board.flash-qspi;
+
+          linux = pkgs.pkgsCross.armv7l-hf-multiplatform.callPackage ./linux.nix { };
         };
 
       nixosConfigurations.foo = nixpkgs.lib.nixosSystem {
@@ -107,6 +109,8 @@
         imports = [ "${devshell}/extra/git/hooks.nix" ];
 
         packages = [
+          pkgs.pkgsCross.armv7l-hf-multiplatform.stdenv.cc
+          pkgs.gdb
           pkgs.xilinx-unified
         ];
 
