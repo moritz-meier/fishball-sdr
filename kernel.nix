@@ -9,10 +9,11 @@
   perl,
   pkg-config,
   python3,
+  ubootTools,
 }:
 
 stdenv.mkDerivation {
-  name = "linux";
+  name = "kernel";
 
   src = fetchgit {
     url = "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git";
@@ -32,19 +33,20 @@ stdenv.mkDerivation {
     perl
     pkg-config
     python3
+    ubootTools
   ];
-
-  #hardeningDisable = [ "all" ];
 
   configurePhase = ''
     make ARCH=arm CROSS_COMPILE=${stdenv.cc.targetPrefix} O=./build defconfig
 
     echo "CONFIG_SERIAL_XILINX_PS_UART=y" >> ./build/.config
     echo "CONFIG_SERIAL_XILINX_PS_UART_CONSOLE=y" >> ./build/.config
+
+    echo "CONFIG_DEBUG_INFO=y" >> ./build/.config
   '';
 
   buildPhase = ''
-    make ARCH=arm CROSS_COMPILE=${stdenv.cc.targetPrefix} O=./build -j $NIX_BUILD_CORES
+    make -j $NIX_BUILD_CORES ARCH=arm CROSS_COMPILE=${stdenv.cc.targetPrefix} O=./build
   '';
 
   installPhase = ''

@@ -77,7 +77,7 @@
           boot = board.boot-jtag;
           flash = board.flash-qspi;
 
-          linux = pkgs.pkgsCross.armv7l-hf-multiplatform.callPackage ./linux.nix { };
+          kernel = pkgs.pkgsCross.armv7l-hf-multiplatform.callPackage ./kernel.nix { };
         };
 
       nixosConfigurations.foo = nixpkgs.lib.nixosSystem {
@@ -98,6 +98,17 @@
 
               nixpkgs.buildPlatform = "x86_64-linux";
               nixpkgs.hostPlatform = "armv7l-linux";
+
+              boot.kernelPatches = [
+                {
+                  name = "zynq7000";
+                  patch = null;
+                  extraConfig = ''
+                    SERIAL_XILINX_PS_UART y
+                    SERIAL_XILINX_PS_UART_CONSOLE y
+                  '';
+                }
+              ];
             }
           )
         ];
