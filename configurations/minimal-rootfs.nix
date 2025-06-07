@@ -51,6 +51,15 @@
             # SERIAL_8250 = yes;
             # SERIAL_8250_CONSOLE = yes;
 
+            AEABI = yes; # we assume eabi in the userspace for NixOS on armv7l
+            ARCH_MULTI_V7 = yes; # enable Cortex-A support, avoid µ-controller Linux
+            ARCH_VIRT = yes; # enable virtualization support
+            ARM_THUMBEE = yes; # ThumbEE may be used by our userspace
+            COMPAT_32BIT_TIME = yes; # otherwise glibc's pthread_once exits with exit code 4
+            MMU = yes; # enable MMU
+            NEON = yes; # we assume neon is available
+            VFP = yes; # target is gnueabihf -> hardware floating point unit support
+
             SERIAL_AMBA_PL011 = yes;
             SERIAL_AMBA_PL011_CONSOLE = yes;
 
@@ -93,6 +102,26 @@
 
     nixpkgs.overlays = [
       (final: prev: {
+        /*
+          pkgs/os-specific/linux/kernel/generic.nix unconditionally adds defaults from
+          lib/systems/platforms.nix, in particular `stdenv.hostPlatform.linux-kernel.extraConfig`,
+          to extraConfig. That is particularly bad, as there is no easy way to get rid of it.
+
+          Upstream PR: https://github.com/NixOS/nixpkgs/pull/413059
+        */
+        stdenv =
+          let
+            removeByPath =
+              pathList: set:
+              lib.updateManyAttrsByPath [
+                {
+                  path = lib.init pathList;
+                  update = old: lib.filterAttrs (n: v: n != (lib.last pathList)) old;
+                }
+              ] set;
+          in
+          removeByPath [ "hostPlatform" "linux-kernel" "extraConfig" ] prev.stdenv;
+
         # https://github.com/NixOS/nixpkgs/issues/154163
         makeModulesClosure = x: prev.makeModulesClosure (x // { allowMissing = true; });
 
