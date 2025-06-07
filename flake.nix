@@ -88,6 +88,8 @@
         modules = [
           (
             {
+              lib,
+              pkgs,
               modulesPath,
               ...
             }:
@@ -96,19 +98,21 @@
                 (modulesPath + "/installer/netboot/netboot.nix")
               ];
 
-              nixpkgs.buildPlatform = "x86_64-linux";
-              nixpkgs.hostPlatform = "armv7l-linux";
+              config = {
+                nixpkgs.buildPlatform = "x86_64-linux";
+                nixpkgs.hostPlatform = "armv7l-linux";
 
-              boot.kernelPatches = [
-                {
-                  name = "zynq7000";
-                  patch = null;
-                  extraConfig = ''
-                    SERIAL_XILINX_PS_UART y
-                    SERIAL_XILINX_PS_UART_CONSOLE y
-                  '';
-                }
-              ];
+                boot.kernelPackages = pkgs.linuxPackagesFor (
+                  pkgs.linuxPackages_6_14.kernel
+                  #   argsOverride = {
+                  #     structuredExtraConfig = with lib.kernel; {
+                  #       SERIAL_XILINX_PS_UART = yes;
+                  #       SERIAL_XILINX_PS_UART_CONSOLE = yes;
+                  #     };
+                  #   };
+                  # }
+                );
+              };
             }
           )
         ];
