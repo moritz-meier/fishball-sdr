@@ -48,9 +48,9 @@
             SQUASHFS_ZSTD = yes;
             SQUASHFS_CHOICE_DECOMP_BY_MOUNT = yes; # make `mount -o threads=multi` work
 
-            # SERIAL_8250 = yes;
-            # SERIAL_8250_CONSOLE = yes;
-
+            #
+            ### armv7 specifics
+            #
             AEABI = yes; # we assume eabi in the userspace for NixOS on armv7l
             ARCH_MULTI_V7 = yes; # enable Cortex-A support, avoid µ-controller Linux
             ARCH_VIRT = yes; # enable virtualization support
@@ -60,40 +60,31 @@
             NEON = yes; # we assume neon is available
             VFP = yes; # target is gnueabihf -> hardware floating point unit support
 
-            SERIAL_AMBA_PL011 = yes;
-            SERIAL_AMBA_PL011_CONSOLE = yes;
-
-            SERIAL_AMBA_PL010 = yes; # for QEMU?
-            SERIAL_AMBA_PL010_CONSOLE = yes;
-
-            SERIAL_XILINX_PS_UART = yes; # for real HW
-            SERIAL_XILINX_PS_UART_CONSOLE = yes;
-
+            #
+            ### Xilinx specifics
+            #
+            FPGA = yes;
+            FPGA_MGR_ZYNQ_FPGA = yes;
+            GPIO_ZYNQ = yes;
+            RESET_ZYNQ = yes;
             SERIAL_UARTLITE = yes; # or the above?
             SERIAL_UARTLITE_CONSOLE = yes;
+            SERIAL_XILINX_PS_UART = yes; # for real HW
+            SERIAL_XILINX_PS_UART_CONSOLE = yes;
+            SPI_ZYNQ_QSPI = yes;
 
             #
             ### Pruning of unecessary stuff
             #
-
-            # ARM_BIG_LITTLE_CPUIDLE = no;
-            # KS8851_MLL = no;
-            # SERIAL_8250_BCM2835AUX = no;
-            # SERIAL_8250_EXTENDED = no;
-            # SERIAL_8250_SHARE_IRQ = no;
-            # SQUASHFS_FS_POSIX_ACL
-            # SQUASHFS_FS_XATTR
-
+            BT = no;
+            CAN = no;
             DRM = no;
-            SOUND = no;
+            FB = no;
             MEDIA_SUPPORT = no;
-
-            #
-            ### Boot debugging desperation
-            #
-
-            # HIGHMEM = no; # something activates this :(
-            HIGHPTE = no;
+            NFC = no;
+            SOUND = no;
+            WIRELESS = no;
+            WLAN = no;
           };
           ignoreConfigErrors = false;
         };
