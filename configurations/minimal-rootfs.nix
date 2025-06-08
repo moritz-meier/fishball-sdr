@@ -72,10 +72,14 @@
             SERIAL_XILINX_PS_UART = yes; # for real HW
             SERIAL_XILINX_PS_UART_CONSOLE = yes;
             SPI_ZYNQ_QSPI = yes;
+            NET_VENDOR_XILINX = yes; # TODO maybe not needed?
+            NET_VENDOR_CADENCE = yes; # required by Xilinx
 
             #
             ### Pruning of unecessary stuff
             #
+
+            # subsystems
             BT = no;
             CAN = no;
             DRM = no;
@@ -85,6 +89,110 @@
             SOUND = no;
             WIRELESS = no;
             WLAN = no;
+            # INPUT = no; # TODO why ?
+
+            # platform support
+            # CRYPTO_DEV_MARVELL = no; # this select PLAT_ORION
+            # GPIO_MVEBU = no; # this selects PLAT_ORION
+            # PLAT_ORION = no; # TODO why can't we disable this?
+            ARCH_BCM = no;
+            ARCH_EXYNOS = no;
+            ARCH_HISI = no;
+            ARCH_HPE = no;
+            ARCH_INTEL_SOCFPGA = no;
+            ARCH_MXC = no;
+            ARCH_QCOM = no;
+            ARCH_RDA = no;
+            ARCH_REALTEK = no;
+            ARCH_REALVIEW = no;
+            ARCH_RENESAS = no;
+            ARCH_ROCKCHIP = no;
+            ARCH_S5PV210 = no;
+            ARCH_STI = no;
+            ARCH_STM32 = no;
+            ARCH_SUNPLUS = no;
+            ARCH_SUNXI = no;
+            ARCH_TEGRA = no;
+            ARCH_U8500 = no;
+            ARCH_UNIPHIER = no;
+            ARCH_VEXPRESS = no;
+            ARCH_WM8850 = no;
+            CHROME_PLATFORMS = no;
+            PLAT_SPEAR = no;
+            # SOC_SAMSUNG = no;
+
+            # network drivers
+            NET_VENDOR_3COM = no;
+            NET_VENDOR_ACTIONS = no;
+            NET_VENDOR_ADAPTEC = no;
+            NET_VENDOR_ADI = no;
+            NET_VENDOR_AGERE = no;
+            NET_VENDOR_ALACRITECH = no;
+            NET_VENDOR_ALTEON = no;
+            NET_VENDOR_AMAZON = no;
+            NET_VENDOR_AMD = no;
+            NET_VENDOR_AQUANTIA = no;
+            NET_VENDOR_ARC = no;
+            NET_VENDOR_ASIX = no;
+            NET_VENDOR_ATHEROS = no;
+            NET_VENDOR_BROADCOM = no;
+            NET_VENDOR_BROCADE = no;
+            NET_VENDOR_CAVIUM = no;
+            NET_VENDOR_CHELSIO = no;
+            NET_VENDOR_CIRRUS = no;
+            NET_VENDOR_CISCO = no;
+            NET_VENDOR_CORTINA = no;
+            NET_VENDOR_DAVICOM = no;
+            NET_VENDOR_DEC = no;
+            NET_VENDOR_DLINK = no;
+            NET_VENDOR_EMULEX = no;
+            NET_VENDOR_ENGLEDER = no;
+            NET_VENDOR_EZCHIP = no;
+            NET_VENDOR_FARADAY = no;
+            NET_VENDOR_FUNGIBLE = no;
+            NET_VENDOR_GOOGLE = no;
+            NET_VENDOR_HISILICON = no;
+            NET_VENDOR_HUAWEI = no;
+            NET_VENDOR_INTEL = no;
+            NET_VENDOR_LITEX = no;
+            NET_VENDOR_MARVELL = no;
+            NET_VENDOR_MELLANOX = no;
+            NET_VENDOR_MICREL = no;
+            NET_VENDOR_MICROCHIP = no;
+            NET_VENDOR_MICROSEMI = no;
+            NET_VENDOR_MICROSOFT = no;
+            NET_VENDOR_MYRI = no;
+            NET_VENDOR_NATSEMI = no;
+            NET_VENDOR_NETERION = no;
+            NET_VENDOR_NETRONOME = no;
+            NET_VENDOR_NI = no;
+            NET_VENDOR_NVIDIA = no;
+            NET_VENDOR_OKI = no;
+            NET_VENDOR_PACKET_ENGINES = no;
+            NET_VENDOR_PENSANDO = no;
+            NET_VENDOR_QLOGIC = no;
+            NET_VENDOR_QUALCOMM = no;
+            NET_VENDOR_RDC = no;
+            NET_VENDOR_REALTEK = no;
+            NET_VENDOR_RENESAS = no;
+            NET_VENDOR_ROCKER = no;
+            NET_VENDOR_SAMSUNG = no;
+            NET_VENDOR_SEEQ = no;
+            NET_VENDOR_SILAN = no;
+            NET_VENDOR_SIS = no;
+            NET_VENDOR_SMSC = no;
+            NET_VENDOR_SOCIONEXT = no;
+            NET_VENDOR_SOLARFLARE = no;
+            NET_VENDOR_STMICRO = no;
+            NET_VENDOR_SUN = no;
+            NET_VENDOR_SYNOPSYS = no;
+            NET_VENDOR_TEHUTI = no;
+            NET_VENDOR_TI = no;
+            NET_VENDOR_VERTEXCOM = no;
+            NET_VENDOR_VIA = no;
+            NET_VENDOR_WANGXUN = no;
+            NET_VENDOR_WIZNET = no;
+
           };
           ignoreConfigErrors = false;
         };
@@ -260,12 +368,21 @@
       pkgs.xz
       pkgs.zstd
 
+      # goodies on-top
+      pkgs.openssh
+
       # debugging aids
       # pkgs.iproute2
       # pkgs.netcat
       # pkgs.socat
       # pkgs.strace
     ];
+
+    services.openssh = {
+      enable = true;
+      settings.PermitRootLogin = "yes";
+      settings.PasswordAuthentication = true;
+    };
 
     # use this to add packages to the early boot stage
     boot.initrd.systemd.initrdBin = [ ];
