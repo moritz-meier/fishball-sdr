@@ -1,10 +1,16 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs?ref=master";
-    xlnx-utils.url = "github:moritz-meier/xilinx-nix-utils?ref=feat/dram-test";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+
+    # Just as a workaround
+    nixpkgs2505.url = "github:nixos/nixpkgs/nixos-25.05";
+
+    xlnx-utils.url = "github:dlr-ft/xilinx-nix-utils/zynq-modules";
     xlnx-utils.inputs.nixpkgs.follows = "nixpkgs";
+
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
+
     treefmt.url = "github:numtide/treefmt-nix";
     treefmt.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -13,11 +19,12 @@
     {
       self,
       nixpkgs,
+      nixpkgs2505,
       xlnx-utils,
       devshell,
       treefmt,
       ...
-    }@inputs:
+    }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -25,6 +32,16 @@
         config.allowUnfree = true;
 
         overlays = [
+          # https://github.com/NixOS/nixpkgs/pull/459393
+          (
+            final: prev:
+            let
+              pkgs = import nixpkgs2505 { inherit system; };
+            in
+            {
+              ratarmount = pkgs.ratarmount;
+            }
+          )
           (final: prev: {
             pkgsCross = prev.pkgsCross // {
               armhf-embedded = import nixpkgs {
@@ -35,28 +52,16 @@
                   gcc.tune = "cortex-a9";
                 };
 
-                overlays = [
-                  xlnx-utils.overlays.zynq-srcs
-                  xlnx-utils.overlays.zynq-utils
-                ];
+                overlays = final.overlays;
               };
             };
           })
 
-          xlnx-utils.overlays.default
+          xlnx-utils.overlays.xilinx-unified
           xlnx-utils.overlays.zynq-srcs
-          xlnx-utils.overlays.zynq-utils
-
-          (final: prev: {
-            zynq-srcs = prev.zynq-srcs // {
-              uboot-src = pkgs.fetchFromGitHub {
-                owner = "Xilinx";
-                repo = "u-boot-xlnx";
-                rev = "xlnx_rebase_v2025.01";
-                hash = "sha256-RTcd7MR37E4yVGWP3RMruyKBI4tz8ex7mY1f5F2xd00=";
-              };
-            };
-          })
+          xlnx-utils.overlays.zynq-pkgs
+          xlnx-utils.overlays.zynq-modules
+          xlnx-utils.overlays.zynq-patches
 
           devshell.overlays.default
         ];
@@ -65,57 +70,12 @@
       treefmtEval = treefmt.lib.evalModule pkgs ./treefmt.nix;
     in
     {
-      packages.${system} =
-        let
-          board = pkgs.callPackage ./fw.nix { };
-        in
-        {
-          fw = board.boot-image;
-          dt = board.linux-dt;
-          dram-test = board.dram-test;
-          uboot = board.uboot;
-          boot = board.boot-jtag;
-          flash = board.flash-qspi;
-
-          kernel = pkgs.pkgsCross.armv7l-hf-multiplatform.callPackage ./kernel.nix { };
+      packages.${system} = {
+        fw = pkgs.zynq-modules.mkZynqFirmware {
+          modules = [
+            (import ./firmware)
+          ];
         };
-
-      nixosConfigurations.foo = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-          flakeRoot = ./.;
-        };
-        modules = [
-          (
-            {
-              lib,
-              pkgs,
-              modulesPath,
-              ...
-            }:
-            {
-              imports = [
-                (modulesPath + "/installer/netboot/netboot.nix")
-              ];
-
-              config = {
-                nixpkgs.buildPlatform = "x86_64-linux";
-                nixpkgs.hostPlatform = "armv7l-linux";
-
-                boot.kernelPackages = pkgs.linuxPackagesFor (
-                  pkgs.linuxPackages_6_14.kernel
-                  #   argsOverride = {
-                  #     structuredExtraConfig = with lib.kernel; {
-                  #       SERIAL_XILINX_PS_UART = yes;
-                  #       SERIAL_XILINX_PS_UART_CONSOLE = yes;
-                  #     };
-                  #   };
-                  # }
-                );
-              };
-            }
-          )
-        ];
       };
 
       devShells.${system}.default = pkgs.devshell.mkShell {
@@ -124,18 +84,16 @@
         imports = [ "${devshell}/extra/git/hooks.nix" ];
 
         packages = [
-          pkgs.pkgsCross.armv7l-hf-multiplatform.stdenv.cc
-          pkgs.gdb
           pkgs.xilinx-unified
         ];
 
-        # git.hooks = {
-        #   enable = true;
-        #   pre-commit.text = ''
-        #     nix fmt
-        #     nix flake check
-        #   '';
-        # };
+        git.hooks = {
+          enable = true;
+          pre-commit.text = ''
+            nix fmt
+            nix flake check
+          '';
+        };
       };
 
       # for `nix fmt`

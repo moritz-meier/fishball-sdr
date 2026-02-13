@@ -1,4 +1,4 @@
-**/result
-**.jou
-**.log
-.direnv
+.direnv/
+result
+*.jou
+*.log
