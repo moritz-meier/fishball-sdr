@@ -18,6 +18,8 @@
     "CONFIG_LOG_DEFAULT_LEVEL=4"
     "CONFIG_LOG_MAX_LEVEL=7"
     "CONFIG_LOG_CONSOLE=y"
+
+    "CONFIG_CMD_USB_MASS_STORAGE=y"
   ];
 
   flash-qspi = {
