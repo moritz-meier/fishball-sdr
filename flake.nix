@@ -78,6 +78,12 @@
         };
       };
 
+      nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+        modules = [
+          (import ./nixos)
+        ];
+      };
+
       devShells.${system}.default = pkgs.devshell.mkShell {
         name = "xilinx-dev-shell";
 
@@ -85,6 +91,7 @@
 
         packages = [
           pkgs.xilinx-unified
+          pkgs.qemu_full
         ];
 
         git.hooks = {
