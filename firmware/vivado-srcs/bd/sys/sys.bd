@@ -189,7 +189,7 @@
         "vlnv": "xilinx.com:ip:processing_system7:5.5",
         "ip_revision": "8",
         "xci_name": "sys_processing_system7_0_0",
-        "xci_path": "ip/sys_processing_system7_0_0/sys_processing_system7_0_0.xci",
+        "xci_path": "ip/sys_processing_system7_0_0_9/sys_processing_system7_0_0.xci",
         "inst_hier_path": "processing_system7_0",
         "has_run_ip_tcl": "true",
         "parameters": {
@@ -1116,7 +1116,7 @@
         "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
         "ip_revision": "17",
         "xci_name": "sys_proc_sys_reset_0_0",
-        "xci_path": "ip/sys_proc_sys_reset_0_0/sys_proc_sys_reset_0_0.xci",
+        "xci_path": "ip/sys_proc_sys_reset_0_0_9/sys_proc_sys_reset_0_0.xci",
         "inst_hier_path": "proc_sys_reset_0",
         "has_run_ip_tcl": "true"
       }
