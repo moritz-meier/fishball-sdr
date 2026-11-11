@@ -1,0 +1,115 @@
+<lsccip:ip xmlns:lsccip="http://www.latticesemi.com/XMLSchema/Radiant/ip"
+    xmlns:xi="http://www.w3.org/2001/XInclude" version="1.0">
+    <lsccip:general>
+        <lsccip:vendor>analog.com</lsccip:vendor>
+        <lsccip:library>sim_model</lsccip:library>
+        <lsccip:name>spi_sdo_sin_tb</lsccip:name>
+        <lsccip:display_name>spi_sdo_sin_tb</lsccip:display_name>
+        <lsccip:version>1.0</lsccip:version>
+        <lsccip:category>Verification IP</lsccip:category>
+        <lsccip:keywords>spi_sdo_sin_tb</lsccip:keywords>
+        <lsccip:min_radiant_version>2023.2</lsccip:min_radiant_version>
+        <lsccip:min_esi_version>2023.2</lsccip:min_esi_version>
+        <lsccip:supported_products>
+            <lsccip:supported_family name="*"/>
+        </lsccip:supported_products>
+        <lsccip:supported_platforms>
+            <lsccip:supported_platform name="esi"/>
+            <lsccip:supported_platform name="radiant"/>
+        </lsccip:supported_platforms>
+    </lsccip:general>
+    <lsccip:settings>
+        <lsccip:setting id="WORD_LENGTH"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_sdo_sin_tb"
+                        title="WORD_LENGTH"
+                        default="18"
+                        output_formatter="nostr"
+                        group1="PARAMS"
+                        group2="GLOB"
+                       />
+        <lsccip:setting id="SAMPLE_COUNT"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_sdo_sin_tb"
+                        title="SAMPLE_COUNT"
+                        default="1024"
+                        output_formatter="nostr"
+                        group1="PARAMS"
+                        group2="GLOB"
+                       />
+        <lsccip:setting id="TRI_STATE_BETWEEN_FRAMES"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_sdo_sin_tb"
+                        title="TRI_STATE_BETWEEN_FRAMES"
+                        default="1"
+                        output_formatter="nostr"
+                        group1="PARAMS"
+                        group2="GLOB"
+                       />
+        <lsccip:setting id="SIGNED"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_sdo_sin_tb"
+                        title="SIGNED"
+                        default="1"
+                        output_formatter="nostr"
+                        group1="PARAMS"
+                        group2="GLOB"
+                       />
+        <lsccip:setting id="SPI_MODE"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_sdo_sin_tb"
+                        title="SPI_MODE"
+                        default="0"
+                        output_formatter="nostr"
+                        group1="PARAMS"
+                        group2="GLOB"
+                       />
+        <lsccip:setting id="SDO_LANES"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_sdo_sin_tb"
+                        title="SDO_LANES"
+                        default="1"
+                        output_formatter="nostr"
+                        group1="PARAMS"
+                        group2="GLOB"
+                       />
+    </lsccip:settings>
+    <lsccip:ports>
+        <lsccip:port name="rstn"
+                     dir="in"
+                     conn_mod="spi_sdo_sin_tb"
+                     conn_port="rstn"
+                    />
+        <lsccip:port name="cs_n"
+                     dir="in"
+                     conn_mod="spi_sdo_sin_tb"
+                     conn_port="cs_n"
+                    />
+        <lsccip:port name="sclk"
+                     dir="in"
+                     conn_mod="spi_sdo_sin_tb"
+                     conn_port="sclk"
+                    />
+        <lsccip:port name="sdo0"
+                     dir="out"
+                     conn_mod="spi_sdo_sin_tb"
+                     conn_port="sdo0"
+                    />
+        <lsccip:port name="sdo"
+                     dir="out"
+                     conn_mod="spi_sdo_sin_tb"
+                     range="(int(SDO_LANES-1),0)"
+                     conn_port="sdo"
+                    />
+    </lsccip:ports>
+    <lsccip:outFileConfigs>
+        <lsccip:fileConfig name="wrapper" file_suffix="sv" file_description="top_level_system_verilog"/>
+    </lsccip:outFileConfigs>
+</lsccip:ip>
+

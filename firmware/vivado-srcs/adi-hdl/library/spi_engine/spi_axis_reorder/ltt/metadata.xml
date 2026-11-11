@@ -1,0 +1,85 @@
+<lsccip:ip xmlns:lsccip="http://www.latticesemi.com/XMLSchema/Radiant/ip"
+    xmlns:xi="http://www.w3.org/2001/XInclude" version="1.0">
+    <lsccip:general>
+        <lsccip:vendor>analog.com</lsccip:vendor>
+        <lsccip:library>ip</lsccip:library>
+        <lsccip:name>spi_axis_reorder</lsccip:name>
+        <lsccip:display_name>AXI SPI Engine AXIS Reorder ADI</lsccip:display_name>
+        <lsccip:version>1.0</lsccip:version>
+        <lsccip:category>ADI</lsccip:category>
+        <lsccip:keywords>ADI IP</lsccip:keywords>
+        <lsccip:min_radiant_version>2022.1</lsccip:min_radiant_version>
+        <lsccip:min_esi_version>2022.1</lsccip:min_esi_version>
+        <lsccip:supported_products>
+            <lsccip:supported_family name="*"/>
+        </lsccip:supported_products>
+        <lsccip:supported_platforms>
+            <lsccip:supported_platform name="esi"/>
+            <lsccip:supported_platform name="radiant"/>
+        </lsccip:supported_platforms>
+    </lsccip:general>
+    <lsccip:settings>
+        <lsccip:setting id="NUM_OF_LANES"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_axis_reorder"
+                        title="Num Of Lanes"
+                        default="2"
+                        output_formatter="nostr"
+                        group1="General Configuration"
+                        group2="Config"
+                       />
+    </lsccip:settings>
+    <lsccip:ports>
+        <lsccip:port name="axis_aclk"
+                     dir="in"
+                     conn_mod="spi_axis_reorder"
+                     conn_port="axis_aclk"
+                    />
+        <lsccip:port name="axis_aresetn"
+                     dir="in"
+                     conn_mod="spi_axis_reorder"
+                     conn_port="axis_aresetn"
+                    />
+        <lsccip:port name="s_axis_valid"
+                     dir="in"
+                     conn_mod="spi_axis_reorder"
+                     conn_port="s_axis_valid"
+                     bus_interface="s_axis"
+                    />
+        <lsccip:port name="s_axis_ready"
+                     dir="out"
+                     conn_mod="spi_axis_reorder"
+                     conn_port="s_axis_ready"
+                     bus_interface="s_axis"
+                    />
+        <lsccip:port name="s_axis_data"
+                     dir="in"
+                     conn_mod="spi_axis_reorder"
+                     range="(int((NUM_OF_LANES*32)-1),0)"
+                     conn_port="s_axis_data"
+                     bus_interface="s_axis"
+                    />
+        <lsccip:port name="m_axis_valid"
+                     dir="out"
+                     conn_mod="spi_axis_reorder"
+                     conn_port="m_axis_valid"
+                     bus_interface="m_axis"
+                    />
+        <lsccip:port name="m_axis_ready"
+                     dir="in"
+                     conn_mod="spi_axis_reorder"
+                     conn_port="m_axis_ready"
+                     bus_interface="m_axis"
+                    />
+        <lsccip:port name="m_axis_data"
+                     dir="out"
+                     conn_mod="spi_axis_reorder"
+                     range="(int(63),0)"
+                     conn_port="m_axis_data"
+                     bus_interface="m_axis"
+                    />
+    </lsccip:ports>
+    <xi:include href="bus_interface.xml" parse="xml"/>
+</lsccip:ip>
+

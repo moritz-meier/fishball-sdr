@@ -1,0 +1,23 @@
+#include <dt-bindings/dma/axi-dmac.h>
+
+&qspi {
+	flash@0 {
+		compatible = "jedec,spi-nor";
+		reg = <0>;
+        spi-max-frequency = <4000000>;
+	};
+};
+
+&sdhci0 {
+	broken-cd; 
+};
+
+&axi_dmac_0 {
+	compatible = "adi,axi-dmac-1.00.a";
+	#dma-cells = <1>;
+};
+
+&axi_dmac_1 {
+	compatible = "adi,axi-dmac-1.00.a";
+	#dma-cells = <1>;
+};

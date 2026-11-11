@@ -1,0 +1,18 @@
+<lsccip:addressSpaces xmlns:lsccip="http://www.latticesemi.com/XMLSchema/Radiant/ip">
+    <lsccip:addressSpace>
+        <lsccip:name>m_dest_axi_aspace</lsccip:name>
+        <lsccip:range>0x100000000</lsccip:range>
+        <lsccip:width>32</lsccip:width>
+    </lsccip:addressSpace>
+    <lsccip:addressSpace>
+        <lsccip:name>m_src_axi_aspace</lsccip:name>
+        <lsccip:range>0x100000000</lsccip:range>
+        <lsccip:width>32</lsccip:width>
+    </lsccip:addressSpace>
+    <lsccip:addressSpace>
+        <lsccip:name>m_sg_axi_aspace</lsccip:name>
+        <lsccip:range>0x100000000</lsccip:range>
+        <lsccip:width>32</lsccip:width>
+    </lsccip:addressSpace>
+</lsccip:addressSpaces>
+

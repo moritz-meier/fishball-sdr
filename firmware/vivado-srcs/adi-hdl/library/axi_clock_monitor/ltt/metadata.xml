@@ -1,0 +1,283 @@
+<lsccip:ip xmlns:lsccip="http://www.latticesemi.com/XMLSchema/Radiant/ip"
+    xmlns:xi="http://www.w3.org/2001/XInclude" version="1.0">
+    <lsccip:general>
+        <lsccip:vendor>analog.com</lsccip:vendor>
+        <lsccip:library>ip</lsccip:library>
+        <lsccip:name>axi_clock_monitor</lsccip:name>
+        <lsccip:display_name>ADI AXI clock monitor</lsccip:display_name>
+        <lsccip:version>1.0</lsccip:version>
+        <lsccip:category>ADI</lsccip:category>
+        <lsccip:keywords>ADI IP</lsccip:keywords>
+        <lsccip:min_radiant_version>2023.2</lsccip:min_radiant_version>
+        <lsccip:min_esi_version>2023.2</lsccip:min_esi_version>
+        <lsccip:supported_products>
+            <lsccip:supported_family name="*"/>
+        </lsccip:supported_products>
+        <lsccip:supported_platforms>
+            <lsccip:supported_platform name="esi"/>
+            <lsccip:supported_platform name="radiant"/>
+        </lsccip:supported_platforms>
+    </lsccip:general>
+    <lsccip:settings>
+        <lsccip:setting id="ID"
+                        type="param"
+                        value_type="int"
+                        conn_mod="axi_clock_monitor"
+                        title="ID"
+                        default="0"
+                        output_formatter="nostr"
+                        group1="General configurations"
+                        group2="Global"
+                       />
+        <lsccip:setting id="NUM_OF_CLOCKS"
+                        type="param"
+                        value_type="int"
+                        conn_mod="axi_clock_monitor"
+                        title="Number of clocks"
+                        default="1"
+                        output_formatter="nostr"
+                        value_range="(1, 16)"
+                        group1="General configurations"
+                        group2="Global"
+                       />
+    </lsccip:settings>
+    <lsccip:ports>
+        <lsccip:port name="clock_0"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="clock_0"
+                     dangling="not(NUM_OF_CLOCKS > 0)"
+                    />
+        <lsccip:port name="clock_1"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="clock_1"
+                     dangling="not(NUM_OF_CLOCKS > 1)"
+                    />
+        <lsccip:port name="clock_2"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="clock_2"
+                     dangling="not(NUM_OF_CLOCKS > 2)"
+                    />
+        <lsccip:port name="clock_3"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="clock_3"
+                     dangling="not(NUM_OF_CLOCKS > 3)"
+                    />
+        <lsccip:port name="clock_4"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="clock_4"
+                     dangling="not(NUM_OF_CLOCKS > 4)"
+                    />
+        <lsccip:port name="clock_5"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="clock_5"
+                     dangling="not(NUM_OF_CLOCKS > 5)"
+                    />
+        <lsccip:port name="clock_6"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="clock_6"
+                     dangling="not(NUM_OF_CLOCKS > 6)"
+                    />
+        <lsccip:port name="clock_7"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="clock_7"
+                     dangling="not(NUM_OF_CLOCKS > 7)"
+                    />
+        <lsccip:port name="clock_8"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="clock_8"
+                     dangling="not(NUM_OF_CLOCKS > 8)"
+                    />
+        <lsccip:port name="clock_9"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="clock_9"
+                     dangling="not(NUM_OF_CLOCKS > 9)"
+                    />
+        <lsccip:port name="clock_10"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="clock_10"
+                     dangling="not(NUM_OF_CLOCKS > 10)"
+                    />
+        <lsccip:port name="clock_11"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="clock_11"
+                     dangling="not(NUM_OF_CLOCKS > 11)"
+                    />
+        <lsccip:port name="clock_12"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="clock_12"
+                     dangling="not(NUM_OF_CLOCKS > 12)"
+                    />
+        <lsccip:port name="clock_13"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="clock_13"
+                     dangling="not(NUM_OF_CLOCKS > 13)"
+                    />
+        <lsccip:port name="clock_14"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="clock_14"
+                     dangling="not(NUM_OF_CLOCKS > 14)"
+                    />
+        <lsccip:port name="clock_15"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="clock_15"
+                     dangling="not(NUM_OF_CLOCKS > 15)"
+                    />
+        <lsccip:port name="reset"
+                     dir="out"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="reset"
+                    />
+        <lsccip:port name="s_axi_aclk"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="s_axi_aclk"
+                    />
+        <lsccip:port name="s_axi_aresetn"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="s_axi_aresetn"
+                    />
+        <lsccip:port name="s_axi_awvalid"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="s_axi_awvalid"
+                     bus_interface="s_axi"
+                    />
+        <lsccip:port name="s_axi_awaddr"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     range="(int(15),0)"
+                     conn_port="s_axi_awaddr"
+                     bus_interface="s_axi"
+                    />
+        <lsccip:port name="s_axi_awprot"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     range="(int(2),0)"
+                     conn_port="s_axi_awprot"
+                     bus_interface="s_axi"
+                    />
+        <lsccip:port name="s_axi_awready"
+                     dir="out"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="s_axi_awready"
+                     bus_interface="s_axi"
+                    />
+        <lsccip:port name="s_axi_wvalid"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="s_axi_wvalid"
+                     bus_interface="s_axi"
+                    />
+        <lsccip:port name="s_axi_wdata"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     range="(int(31),0)"
+                     conn_port="s_axi_wdata"
+                     bus_interface="s_axi"
+                    />
+        <lsccip:port name="s_axi_wstrb"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     range="(int(3),0)"
+                     conn_port="s_axi_wstrb"
+                     bus_interface="s_axi"
+                    />
+        <lsccip:port name="s_axi_wready"
+                     dir="out"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="s_axi_wready"
+                     bus_interface="s_axi"
+                    />
+        <lsccip:port name="s_axi_bvalid"
+                     dir="out"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="s_axi_bvalid"
+                     bus_interface="s_axi"
+                    />
+        <lsccip:port name="s_axi_bresp"
+                     dir="out"
+                     conn_mod="axi_clock_monitor"
+                     range="(int(1),0)"
+                     conn_port="s_axi_bresp"
+                     bus_interface="s_axi"
+                    />
+        <lsccip:port name="s_axi_bready"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="s_axi_bready"
+                     bus_interface="s_axi"
+                    />
+        <lsccip:port name="s_axi_arvalid"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="s_axi_arvalid"
+                     bus_interface="s_axi"
+                    />
+        <lsccip:port name="s_axi_araddr"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     range="(int(15),0)"
+                     conn_port="s_axi_araddr"
+                     bus_interface="s_axi"
+                    />
+        <lsccip:port name="s_axi_arprot"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     range="(int(2),0)"
+                     conn_port="s_axi_arprot"
+                     bus_interface="s_axi"
+                    />
+        <lsccip:port name="s_axi_arready"
+                     dir="out"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="s_axi_arready"
+                     bus_interface="s_axi"
+                    />
+        <lsccip:port name="s_axi_rvalid"
+                     dir="out"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="s_axi_rvalid"
+                     bus_interface="s_axi"
+                    />
+        <lsccip:port name="s_axi_rdata"
+                     dir="out"
+                     conn_mod="axi_clock_monitor"
+                     range="(int(31),0)"
+                     conn_port="s_axi_rdata"
+                     bus_interface="s_axi"
+                    />
+        <lsccip:port name="s_axi_rresp"
+                     dir="out"
+                     conn_mod="axi_clock_monitor"
+                     range="(int(1),0)"
+                     conn_port="s_axi_rresp"
+                     bus_interface="s_axi"
+                    />
+        <lsccip:port name="s_axi_rready"
+                     dir="in"
+                     conn_mod="axi_clock_monitor"
+                     conn_port="s_axi_rready"
+                     bus_interface="s_axi"
+                    />
+    </lsccip:ports>
+    <xi:include href="bus_interface.xml" parse="xml"/>
+    <xi:include href="memory_map.xml" parse="xml"/>
+</lsccip:ip>
+

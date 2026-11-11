@@ -1,0 +1,310 @@
+<lsccip:ip xmlns:lsccip="http://www.latticesemi.com/XMLSchema/Radiant/ip"
+    xmlns:xi="http://www.w3.org/2001/XInclude" version="1.0">
+    <lsccip:general>
+        <lsccip:vendor>analog.com</lsccip:vendor>
+        <lsccip:library>ip</lsccip:library>
+        <lsccip:name>spi_engine_offload</lsccip:name>
+        <lsccip:display_name>AXI SPI Engine Offload ADI</lsccip:display_name>
+        <lsccip:version>1.0</lsccip:version>
+        <lsccip:category>ADI</lsccip:category>
+        <lsccip:keywords>ADI IP</lsccip:keywords>
+        <lsccip:min_radiant_version>2022.1</lsccip:min_radiant_version>
+        <lsccip:min_esi_version>2022.1</lsccip:min_esi_version>
+        <lsccip:supported_products>
+            <lsccip:supported_family name="*"/>
+        </lsccip:supported_products>
+        <lsccip:supported_platforms>
+            <lsccip:supported_platform name="esi"/>
+            <lsccip:supported_platform name="radiant"/>
+        </lsccip:supported_platforms>
+    </lsccip:general>
+    <lsccip:settings>
+        <lsccip:setting id="DATA_WIDTH"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_engine_offload"
+                        title="Shift register's data width"
+                        default="8"
+                        output_formatter="nostr"
+                        value_range="(8, 255)"
+                        group1="General Configuration"
+                        group2="Config"
+                       />
+        <lsccip:setting id="NUM_OF_SDI"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_engine_offload"
+                        title="Number of MISO lines"
+                        default="1"
+                        output_formatter="nostr"
+                        value_range="(1, 8)"
+                        group1="General Configuration"
+                        group2="Config"
+                       />
+        <lsccip:setting id="ASYNC_SPI_CLK"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_engine_offload"
+                        title="Asynchronous core clock"
+                        default="0"
+                        options="[(True, 1), (False, 0)]"
+                        output_formatter="nostr"
+                        group1="General Configuration"
+                        group2="Config"
+                       />
+        <lsccip:setting id="ASYNC_TRIG"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_engine_offload"
+                        title="Asynchronous trigger"
+                        default="0"
+                        options="[(True, 1), (False, 0)]"
+                        output_formatter="nostr"
+                        group1="General Configuration"
+                        group2="Config"
+                       />
+        <lsccip:setting id="SDO_STREAMING"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_engine_offload"
+                        title="SDO Streaming"
+                        default="0"
+                        options="[(True, 1), (False, 0)]"
+                        output_formatter="nostr"
+                        group1="General Configuration"
+                        group2="Config"
+                       />
+        <lsccip:setting id="CMD_MEM_ADDRESS_WIDTH"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_engine_offload"
+                        title="Command FIFO address width"
+                        default="4"
+                        output_formatter="nostr"
+                        value_range="(1, 16)"
+                        group1="Command stream FIFO configuration"
+                        group2="Config"
+                       />
+        <lsccip:setting id="SDO_MEM_ADDRESS_WIDTH"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_engine_offload"
+                        title="MOSI FIFO address width"
+                        default="4"
+                        output_formatter="nostr"
+                        value_range="(1, 16)"
+                        group1="Command stream FIFO configuration"
+                        group2="Config"
+                       />
+    </lsccip:settings>
+    <lsccip:ports>
+        <lsccip:port name="ctrl_clk"
+                     dir="in"
+                     conn_mod="spi_engine_offload"
+                     conn_port="ctrl_clk"
+                    />
+        <lsccip:port name="ctrl_cmd_wr_en"
+                     dir="in"
+                     conn_mod="spi_engine_offload"
+                     conn_port="ctrl_cmd_wr_en"
+                     bus_interface="spi_engine_offload_ctrl"
+                    />
+        <lsccip:port name="ctrl_cmd_wr_data"
+                     dir="in"
+                     conn_mod="spi_engine_offload"
+                     range="(int(15),0)"
+                     conn_port="ctrl_cmd_wr_data"
+                     bus_interface="spi_engine_offload_ctrl"
+                    />
+        <lsccip:port name="ctrl_sdo_wr_en"
+                     dir="in"
+                     conn_mod="spi_engine_offload"
+                     conn_port="ctrl_sdo_wr_en"
+                     bus_interface="spi_engine_offload_ctrl"
+                    />
+        <lsccip:port name="ctrl_sdo_wr_data"
+                     dir="in"
+                     conn_mod="spi_engine_offload"
+                     range="(int((DATA_WIDTH-1)),0)"
+                     conn_port="ctrl_sdo_wr_data"
+                     bus_interface="spi_engine_offload_ctrl"
+                    />
+        <lsccip:port name="ctrl_enable"
+                     dir="in"
+                     conn_mod="spi_engine_offload"
+                     conn_port="ctrl_enable"
+                     bus_interface="spi_engine_offload_ctrl"
+                    />
+        <lsccip:port name="ctrl_enabled"
+                     dir="out"
+                     conn_mod="spi_engine_offload"
+                     conn_port="ctrl_enabled"
+                     bus_interface="spi_engine_offload_ctrl"
+                    />
+        <lsccip:port name="ctrl_mem_reset"
+                     dir="in"
+                     conn_mod="spi_engine_offload"
+                     conn_port="ctrl_mem_reset"
+                     bus_interface="spi_engine_offload_ctrl"
+                    />
+        <lsccip:port name="status_sync_valid"
+                     dir="out"
+                     conn_mod="spi_engine_offload"
+                     conn_port="status_sync_valid"
+                     bus_interface="spi_engine_offload_ctrl"
+                    />
+        <lsccip:port name="status_sync_ready"
+                     dir="in"
+                     conn_mod="spi_engine_offload"
+                     conn_port="status_sync_ready"
+                     bus_interface="spi_engine_offload_ctrl"
+                    />
+        <lsccip:port name="status_sync_data"
+                     dir="out"
+                     conn_mod="spi_engine_offload"
+                     range="(int(7),0)"
+                     conn_port="status_sync_data"
+                     bus_interface="spi_engine_offload_ctrl"
+                    />
+        <lsccip:port name="spi_clk"
+                     dir="in"
+                     conn_mod="spi_engine_offload"
+                     conn_port="spi_clk"
+                    />
+        <lsccip:port name="spi_resetn"
+                     dir="in"
+                     conn_mod="spi_engine_offload"
+                     conn_port="spi_resetn"
+                    />
+        <lsccip:port name="trigger"
+                     dir="in"
+                     conn_mod="spi_engine_offload"
+                     conn_port="trigger"
+                    />
+        <lsccip:port name="cmd_valid"
+                     dir="out"
+                     conn_mod="spi_engine_offload"
+                     conn_port="cmd_valid"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="cmd_ready"
+                     dir="in"
+                     conn_mod="spi_engine_offload"
+                     conn_port="cmd_ready"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="cmd"
+                     dir="out"
+                     conn_mod="spi_engine_offload"
+                     range="(int(15),0)"
+                     conn_port="cmd"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="sdo_data_valid"
+                     dir="out"
+                     conn_mod="spi_engine_offload"
+                     conn_port="sdo_data_valid"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="sdo_data_ready"
+                     dir="in"
+                     conn_mod="spi_engine_offload"
+                     conn_port="sdo_data_ready"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="sdo_data"
+                     dir="out"
+                     conn_mod="spi_engine_offload"
+                     range="(int((DATA_WIDTH-1)),0)"
+                     conn_port="sdo_data"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="s_axis_sdo_data"
+                     dir="in"
+                     conn_mod="spi_engine_offload"
+                     range="(int((DATA_WIDTH-1)),0)"
+                     conn_port="s_axis_sdo_data"
+                     bus_interface="s_axis_sdo"
+                     dangling="(SDO_STREAMING == 0)"
+                    />
+        <lsccip:port name="s_axis_sdo_ready"
+                     dir="out"
+                     conn_mod="spi_engine_offload"
+                     conn_port="s_axis_sdo_ready"
+                     bus_interface="s_axis_sdo"
+                     dangling="(SDO_STREAMING == 0)"
+                    />
+        <lsccip:port name="s_axis_sdo_valid"
+                     dir="in"
+                     conn_mod="spi_engine_offload"
+                     conn_port="s_axis_sdo_valid"
+                     bus_interface="s_axis_sdo"
+                     dangling="(SDO_STREAMING == 0)"
+                    />
+        <lsccip:port name="sdi_data_valid"
+                     dir="in"
+                     conn_mod="spi_engine_offload"
+                     conn_port="sdi_data_valid"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="sdi_data_ready"
+                     dir="out"
+                     conn_mod="spi_engine_offload"
+                     conn_port="sdi_data_ready"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="sdi_data"
+                     dir="in"
+                     conn_mod="spi_engine_offload"
+                     range="(int((NUM_OF_SDI*DATA_WIDTH-1)),0)"
+                     conn_port="sdi_data"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="sync_valid"
+                     dir="in"
+                     conn_mod="spi_engine_offload"
+                     conn_port="sync_valid"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="sync_ready"
+                     dir="out"
+                     conn_mod="spi_engine_offload"
+                     conn_port="sync_ready"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="sync_data"
+                     dir="in"
+                     conn_mod="spi_engine_offload"
+                     range="(int(7),0)"
+                     conn_port="sync_data"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="offload_sdi_valid"
+                     dir="out"
+                     conn_mod="spi_engine_offload"
+                     conn_port="offload_sdi_valid"
+                     bus_interface="offload_sdi"
+                    />
+        <lsccip:port name="offload_sdi_ready"
+                     dir="in"
+                     conn_mod="spi_engine_offload"
+                     conn_port="offload_sdi_ready"
+                     bus_interface="offload_sdi"
+                    />
+        <lsccip:port name="offload_sdi_data"
+                     dir="out"
+                     conn_mod="spi_engine_offload"
+                     range="(int((NUM_OF_SDI*DATA_WIDTH-1)),0)"
+                     conn_port="offload_sdi_data"
+                     bus_interface="offload_sdi"
+                    />
+        <lsccip:port name="interconnect_dir"
+                     dir="out"
+                     conn_mod="spi_engine_offload"
+                     conn_port="interconnect_dir"
+                     bus_interface="m_interconnect_ctrl"
+                    />
+    </lsccip:ports>
+    <xi:include href="bus_interface.xml" parse="xml"/>
+</lsccip:ip>
+

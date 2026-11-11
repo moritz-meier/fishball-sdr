@@ -1,0 +1,35 @@
+# This file is automatically written.  Do not modify.
+proc gen_USERPARAMETER_DW_VALUE {DEVICE } {expr {[info exists DEVICE] ?  $DEVICE eq {AD4858} ? 31 :  $DEVICE eq {AD4857} ? 15 :  $DEVICE eq {AD4856} ? 31 :  $DEVICE eq {AD4855} ? 15 :  $DEVICE eq {AD4854} ? 31 :  $DEVICE eq {AD4853} ? 15 :  $DEVICE eq {AD4852} ? 31 :  $DEVICE eq {AD4851} ? 15 : 31 : 31}
+}
+proc gen_USERPARAMETER_LANE_0_ENABLE_ENABLEMENT {LVDS_CMOS_N } {expr $LVDS_CMOS_N == 0
+    }
+proc gen_USERPARAMETER_LANE_0_ENABLE_VALUE {LVDS_CMOS_N } {expr {[info exists LVDS_CMOS_N] ? $LVDS_CMOS_N == 0 : 0}
+    }
+proc gen_USERPARAMETER_LANE_1_ENABLE_ENABLEMENT {LVDS_CMOS_N } {expr $LVDS_CMOS_N == 0
+    }
+proc gen_USERPARAMETER_LANE_1_ENABLE_VALUE {LVDS_CMOS_N } {expr {[info exists LVDS_CMOS_N] ? $LVDS_CMOS_N == 0 : 0}
+    }
+proc gen_USERPARAMETER_LANE_2_ENABLE_ENABLEMENT {LVDS_CMOS_N } {expr $LVDS_CMOS_N == 0
+    }
+proc gen_USERPARAMETER_LANE_2_ENABLE_VALUE {LVDS_CMOS_N } {expr {[info exists LVDS_CMOS_N] ? $LVDS_CMOS_N == 0 : 0}
+    }
+proc gen_USERPARAMETER_LANE_3_ENABLE_ENABLEMENT {LVDS_CMOS_N } {expr $LVDS_CMOS_N == 0
+    }
+proc gen_USERPARAMETER_LANE_3_ENABLE_VALUE {LVDS_CMOS_N } {expr {[info exists LVDS_CMOS_N] ? $LVDS_CMOS_N == 0 : 0}
+    }
+proc gen_USERPARAMETER_LANE_4_ENABLE_ENABLEMENT {LVDS_CMOS_N DEVICE } {expr {$LVDS_CMOS_N == 1 ? 0 :  $DEVICE == {AD4854} ? 0 :  $DEVICE == {AD4853} ? 0 :  $DEVICE == {AD4852} ? 0 :  $DEVICE == {AD4851} ? 0 : 1}
+    }
+proc gen_USERPARAMETER_LANE_4_ENABLE_VALUE {LVDS_CMOS_N DEVICE } {expr {[info exists LVDS_CMOS_N] && [info exists DEVICE] ?  $LVDS_CMOS_N == 1 ? 0 :  $DEVICE == {AD4854} ? 0 :  $DEVICE == {AD4853} ? 0 :  $DEVICE == {AD4852} ? 0 :  $DEVICE == {AD4851} ? 0 : 1 : 0}
+    }
+proc gen_USERPARAMETER_LANE_5_ENABLE_ENABLEMENT {LVDS_CMOS_N DEVICE } {expr {$LVDS_CMOS_N == 1 ? 0 :  $DEVICE == {AD4854} ? 0 :  $DEVICE == {AD4853} ? 0 :  $DEVICE == {AD4852} ? 0 :  $DEVICE == {AD4851} ? 0 : 1}
+    }
+proc gen_USERPARAMETER_LANE_5_ENABLE_VALUE {LVDS_CMOS_N DEVICE } {expr {[info exists LVDS_CMOS_N] && [info exists DEVICE] ?  $LVDS_CMOS_N == 1 ? 0 :  $DEVICE == {AD4854} ? 0 :  $DEVICE == {AD4853} ? 0 :  $DEVICE == {AD4852} ? 0 :  $DEVICE == {AD4851} ? 0 : 1 : 0}
+    }
+proc gen_USERPARAMETER_LANE_6_ENABLE_ENABLEMENT {LVDS_CMOS_N DEVICE } {expr {$LVDS_CMOS_N == 1 ? 0 :  $DEVICE == {AD4854} ? 0 :  $DEVICE == {AD4853} ? 0 :  $DEVICE == {AD4852} ? 0 :  $DEVICE == {AD4851} ? 0 : 1}
+    }
+proc gen_USERPARAMETER_LANE_6_ENABLE_VALUE {LVDS_CMOS_N DEVICE } {expr {[info exists LVDS_CMOS_N] && [info exists DEVICE] ?  $LVDS_CMOS_N == 1 ? 0 :  $DEVICE == {AD4854} ? 0 :  $DEVICE == {AD4853} ? 0 :  $DEVICE == {AD4852} ? 0 :  $DEVICE == {AD4851} ? 0 : 1 : 0}
+    }
+proc gen_USERPARAMETER_LANE_7_ENABLE_ENABLEMENT {LVDS_CMOS_N DEVICE } {expr {$LVDS_CMOS_N == 1 ? 0 :  $DEVICE == {AD4854} ? 0 :  $DEVICE == {AD4853} ? 0 :  $DEVICE == {AD4852} ? 0 :  $DEVICE == {AD4851} ? 0 : 1}
+    }
+proc gen_USERPARAMETER_LANE_7_ENABLE_VALUE {LVDS_CMOS_N DEVICE } {expr {[info exists LVDS_CMOS_N] && [info exists DEVICE] ?  $LVDS_CMOS_N == 1 ? 0 :  $DEVICE == {AD4854} ? 0 :  $DEVICE == {AD4853} ? 0 :  $DEVICE == {AD4852} ? 0 :  $DEVICE == {AD4851} ? 0 : 1 : 0}
+    }

@@ -1,0 +1,245 @@
+<lsccip:ip xmlns:lsccip="http://www.latticesemi.com/XMLSchema/Radiant/ip"
+    xmlns:xi="http://www.w3.org/2001/XInclude" version="1.0">
+    <lsccip:general>
+        <lsccip:vendor>analog.com</lsccip:vendor>
+        <lsccip:library>ip</lsccip:library>
+        <lsccip:name>spi_engine_execution</lsccip:name>
+        <lsccip:display_name>AXI SPI Engine execution ADI</lsccip:display_name>
+        <lsccip:version>1.0</lsccip:version>
+        <lsccip:category>ADI</lsccip:category>
+        <lsccip:keywords>ADI IP</lsccip:keywords>
+        <lsccip:min_radiant_version>2022.1</lsccip:min_radiant_version>
+        <lsccip:min_esi_version>2022.1</lsccip:min_esi_version>
+        <lsccip:supported_products>
+            <lsccip:supported_family name="*"/>
+        </lsccip:supported_products>
+        <lsccip:supported_platforms>
+            <lsccip:supported_platform name="esi"/>
+            <lsccip:supported_platform name="radiant"/>
+        </lsccip:supported_platforms>
+    </lsccip:general>
+    <lsccip:settings>
+        <lsccip:setting id="DATA_WIDTH"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_engine_execution"
+                        title="Parallel data width"
+                        default="8"
+                        output_formatter="nostr"
+                        value_range="(8, 32)"
+                        group1="General Configuration"
+                        group2="Config"
+                       />
+        <lsccip:setting id="NUM_OF_CS"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_engine_execution"
+                        title="Number of CSN lines"
+                        default="1"
+                        output_formatter="nostr"
+                        value_range="(1, 8)"
+                        group1="General Configuration"
+                        group2="Config"
+                       />
+        <lsccip:setting id="NUM_OF_SDI"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_engine_execution"
+                        title="Number of MISO"
+                        default="1"
+                        output_formatter="nostr"
+                        value_range="(1, 8)"
+                        group1="General Configuration"
+                        group2="Config"
+                       />
+        <lsccip:setting id="DEFAULT_SPI_CFG"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_engine_execution"
+                        title="Default SPI mode"
+                        default="0"
+                        options="[0, 1, 2, 3]"
+                        output_formatter="nostr"
+                        group1="SPI Configuration"
+                        group2="Config"
+                       />
+        <lsccip:setting id="DEFAULT_CLK_DIV"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_engine_execution"
+                        title="Default SCLK divider"
+                        default="0"
+                        output_formatter="nostr"
+                        value_range="(0, 255)"
+                        group1="SPI Configuration"
+                        group2="Config"
+                       />
+        <lsccip:setting id="SDI_DELAY"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_engine_execution"
+                        title="Delay MISO latching"
+                        default="0"
+                        options="[(True, 1), (False, 0)]"
+                        output_formatter="nostr"
+                        group1="MOSI/MISO Configuration"
+                        group2="Config"
+                       />
+        <lsccip:setting id="SDO_DEFAULT"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_engine_execution"
+                        title="MOSI default level"
+                        default="0"
+                        options="[0, 1]"
+                        output_formatter="nostr"
+                        group1="MOSI/MISO Configuration"
+                        group2="Config"
+                       />
+        <lsccip:setting id="ECHO_SCLK"
+                        type="param"
+                        value_type="int"
+                        conn_mod="spi_engine_execution"
+                        title="Echoed SCLK"
+                        default="0"
+                        options="[(True, 1), (False, 0)]"
+                        output_formatter="nostr"
+                        group1="Custom clocking options"
+                        group2="Config"
+                       />
+    </lsccip:settings>
+    <lsccip:ports>
+        <lsccip:port name="clk"
+                     dir="in"
+                     conn_mod="spi_engine_execution"
+                     conn_port="clk"
+                    />
+        <lsccip:port name="resetn"
+                     dir="in"
+                     conn_mod="spi_engine_execution"
+                     conn_port="resetn"
+                    />
+        <lsccip:port name="cmd_ready"
+                     dir="out"
+                     conn_mod="spi_engine_execution"
+                     conn_port="cmd_ready"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="cmd_valid"
+                     dir="in"
+                     conn_mod="spi_engine_execution"
+                     conn_port="cmd_valid"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="cmd"
+                     dir="in"
+                     conn_mod="spi_engine_execution"
+                     range="(int(15),0)"
+                     conn_port="cmd"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="sdo_data_valid"
+                     dir="in"
+                     conn_mod="spi_engine_execution"
+                     conn_port="sdo_data_valid"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="sdo_data_ready"
+                     dir="out"
+                     conn_mod="spi_engine_execution"
+                     conn_port="sdo_data_ready"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="sdo_data"
+                     dir="in"
+                     conn_mod="spi_engine_execution"
+                     range="(int((DATA_WIDTH-1)),0)"
+                     conn_port="sdo_data"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="sdi_data_ready"
+                     dir="in"
+                     conn_mod="spi_engine_execution"
+                     conn_port="sdi_data_ready"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="sdi_data_valid"
+                     dir="out"
+                     conn_mod="spi_engine_execution"
+                     conn_port="sdi_data_valid"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="sdi_data"
+                     dir="out"
+                     conn_mod="spi_engine_execution"
+                     range="(int((NUM_OF_SDI*DATA_WIDTH)-1),0)"
+                     conn_port="sdi_data"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="sync_ready"
+                     dir="in"
+                     conn_mod="spi_engine_execution"
+                     conn_port="sync_ready"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="sync_valid"
+                     dir="out"
+                     conn_mod="spi_engine_execution"
+                     conn_port="sync_valid"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="sync"
+                     dir="out"
+                     conn_mod="spi_engine_execution"
+                     range="(int(7),0)"
+                     conn_port="sync"
+                     bus_interface="spi_engine_ctrl"
+                    />
+        <lsccip:port name="echo_sclk"
+                     dir="in"
+                     conn_mod="spi_engine_execution"
+                     conn_port="echo_sclk"
+                     dangling="(ECHO_SCLK != 1)"
+                    />
+        <lsccip:port name="sclk"
+                     dir="out"
+                     conn_mod="spi_engine_execution"
+                     conn_port="sclk"
+                     bus_interface="spi_master"
+                    />
+        <lsccip:port name="sdo"
+                     dir="out"
+                     conn_mod="spi_engine_execution"
+                     conn_port="sdo"
+                     bus_interface="spi_master"
+                    />
+        <lsccip:port name="sdo_t"
+                     dir="out"
+                     conn_mod="spi_engine_execution"
+                     conn_port="sdo_t"
+                     bus_interface="spi_master"
+                    />
+        <lsccip:port name="sdi"
+                     dir="in"
+                     conn_mod="spi_engine_execution"
+                     range="(int(NUM_OF_SDI-1),0)"
+                     conn_port="sdi"
+                     bus_interface="spi_master"
+                    />
+        <lsccip:port name="cs"
+                     dir="out"
+                     conn_mod="spi_engine_execution"
+                     range="(int(NUM_OF_CS-1),0)"
+                     conn_port="cs"
+                     bus_interface="spi_master"
+                    />
+        <lsccip:port name="three_wire"
+                     dir="out"
+                     conn_mod="spi_engine_execution"
+                     conn_port="three_wire"
+                     bus_interface="spi_master"
+                    />
+    </lsccip:ports>
+    <xi:include href="bus_interface.xml" parse="xml"/>
+</lsccip:ip>
+

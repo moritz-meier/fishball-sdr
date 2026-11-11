@@ -1,0 +1,23 @@
+<lsccip:memoryMaps xmlns:lsccip="http://www.latticesemi.com/XMLSchema/Radiant/ip">
+    <lsccip:memoryMap>
+        <lsccip:name>axi_pulse_gen_mem_map</lsccip:name>
+        <lsccip:description>axi_pulse_gen_mem_map</lsccip:description>
+        <lsccip:addressBlock>
+            <lsccip:name>axi_pulse_gen_mem_map_reg_space</lsccip:name>
+            <lsccip:baseAddress>0</lsccip:baseAddress>
+            <lsccip:range>65536</lsccip:range>
+            <lsccip:width>32</lsccip:width>
+        </lsccip:addressBlock>
+    </lsccip:memoryMap>
+    <lsccip:memoryMap>
+        <lsccip:name>s_axi_mem_map</lsccip:name>
+        <lsccip:description>s_axi_mem_map</lsccip:description>
+        <lsccip:addressBlock>
+            <lsccip:name>s_axi_mem_map_reg_space</lsccip:name>
+            <lsccip:baseAddress>0</lsccip:baseAddress>
+            <lsccip:range>65536</lsccip:range>
+            <lsccip:width>32</lsccip:width>
+        </lsccip:addressBlock>
+    </lsccip:memoryMap>
+</lsccip:memoryMaps>
+

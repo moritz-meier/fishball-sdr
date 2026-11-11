@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ipxact:abstractionDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ipxact="http://www.accellera.org/XMLSchema/IPXACT/1685-2014"
+    xsi:schemaLocation="http://www.accellera.org/XMLSchema/IPXACT/1685-2014
+    http://www.accellera.org/XMLSchema/IPXACT/1685-2014/index.xsd">
+    <ipxact:vendor>analog.com</ipxact:vendor>
+    <ipxact:library>ADI</ipxact:library>
+    <ipxact:name>if_framelock</ipxact:name>
+    <ipxact:version>1.0</ipxact:version>
+    <ipxact:busType library="ADI" name="if_framelock" vendor="analog.com" version="1.0"/>
+    <ipxact:ports>
+        <ipxact:port>
+            <ipxact:logicalName>s2m_framelock</ipxact:logicalName>
+            <ipxact:description>s2m_framelock port</ipxact:description>
+            <ipxact:wire>
+                <ipxact:qualifier>
+                    <ipxact:isData>true</ipxact:isData>
+                </ipxact:qualifier>
+                <ipxact:onMaster>
+                    <ipxact:presence>required</ipxact:presence>
+                    <ipxact:direction>in</ipxact:direction>
+                </ipxact:onMaster>
+                <ipxact:onSlave>
+                    <ipxact:presence>required</ipxact:presence>
+                    <ipxact:direction>out</ipxact:direction>
+                </ipxact:onSlave>
+            </ipxact:wire>
+        </ipxact:port>
+        <ipxact:port>
+            <ipxact:logicalName>s2m_framelock_valid</ipxact:logicalName>
+            <ipxact:description>s2m_framelock_valid port</ipxact:description>
+            <ipxact:wire>
+                <ipxact:qualifier>
+                    <ipxact:isData>true</ipxact:isData>
+                </ipxact:qualifier>
+                <ipxact:onMaster>
+                    <ipxact:presence>required</ipxact:presence>
+                    <ipxact:width>1</ipxact:width>
+                    <ipxact:direction>in</ipxact:direction>
+                </ipxact:onMaster>
+                <ipxact:onSlave>
+                    <ipxact:presence>required</ipxact:presence>
+                    <ipxact:width>1</ipxact:width>
+                    <ipxact:direction>out</ipxact:direction>
+                </ipxact:onSlave>
+            </ipxact:wire>
+        </ipxact:port>
+        <ipxact:port>
+            <ipxact:logicalName>m2s_framelock</ipxact:logicalName>
+            <ipxact:description>m2s_framelock port</ipxact:description>
+            <ipxact:wire>
+                <ipxact:qualifier>
+                    <ipxact:isData>true</ipxact:isData>
+                </ipxact:qualifier>
+                <ipxact:onMaster>
+                    <ipxact:presence>required</ipxact:presence>
+                    <ipxact:direction>out</ipxact:direction>
+                </ipxact:onMaster>
+                <ipxact:onSlave>
+                    <ipxact:presence>required</ipxact:presence>
+                    <ipxact:direction>in</ipxact:direction>
+                </ipxact:onSlave>
+            </ipxact:wire>
+        </ipxact:port>
+        <ipxact:port>
+            <ipxact:logicalName>m2s_framelock_valid</ipxact:logicalName>
+            <ipxact:description>m2s_framelock_valid port</ipxact:description>
+            <ipxact:wire>
+                <ipxact:qualifier>
+                    <ipxact:isData>true</ipxact:isData>
+                </ipxact:qualifier>
+                <ipxact:onMaster>
+                    <ipxact:presence>required</ipxact:presence>
+                    <ipxact:width>1</ipxact:width>
+                    <ipxact:direction>out</ipxact:direction>
+                </ipxact:onMaster>
+                <ipxact:onSlave>
+                    <ipxact:presence>required</ipxact:presence>
+                    <ipxact:width>1</ipxact:width>
+                    <ipxact:direction>in</ipxact:direction>
+                </ipxact:onSlave>
+            </ipxact:wire>
+        </ipxact:port>
+    </ipxact:ports>
+    <ipxact:description>AXI DMA framelock Interface.</ipxact:description>
+</ipxact:abstractionDefinition>
+
